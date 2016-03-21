@@ -38,6 +38,7 @@ Bundle 'jimenezrick/vimerl'
 Bundle 'tpope/vim-surround'
 Bundle 'Jinja'
 Bundle 'hail2u/vim-css3-syntax'
+Bundle 'pearofducks/ansible-vim'
 
 if vundle_needs_install == 0
     echo "Installing Bundles, please ignore key map error messages"
