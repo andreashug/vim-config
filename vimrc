@@ -33,12 +33,12 @@ Bundle 'jlanzarotta/bufexplorer'
 Bundle 'kien/ctrlp.vim'
 
 " Programming
-Bundle 'klen/python-mode'
 Bundle 'jimenezrick/vimerl'
 Bundle 'tpope/vim-surround'
 Bundle 'Jinja'
 Bundle 'hail2u/vim-css3-syntax'
-Bundle 'pearofducks/ansible-vim'
+Bundle 'davidhalter/jedi-vim'
+Bundle 'scrooloose/syntastic'
 
 if vundle_needs_install == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -118,7 +118,6 @@ let g:ctrlp_custom_ignore = {
   \ 'files': '\.pyc\|\~$',
   \ }
 
-
 " Ack
 nnoremap <leader>a :Ack!<Space>
 
@@ -132,23 +131,20 @@ nnoremap <silent> <leader>d :Bclose<CR>
 nmap <leader>' ysiw'
 nmap <leader>" ysiw"
 
+" Jedi
+let g:jedi#popup_on_dot = 0
+let g:jedi#goto_command = "<F4>"
+let g:jedi#documentation_command = "<F3>"
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_check_on_wq = 0
+
 " Python
 autocmd FileType python setlocal expandtab
-let g:pymode_trim_whitespaces = 0
-let g:pymode_doc_bind = '<F3>'
-let g:pymode_run_bind = '<F5>'
-let g:pymode_rope_goto_definition_bind = '<F4>'
-let g:pymode_rope_goto_definition_cmd = 'e'
-let g:pymode_rope_completion_bind = ''
-let g:pymode_rope_complete_on_dot = 0
-let g:pymode_rope_autoimport = 0
-let g:pymode_rope_regenerate_on_write = 0
-let g:pymode_indent = 0
-let g:pymode_lint_cwindow = 0
-let g:pymode_lint_options_pep8 = {'max_line_length': 99}
-if has('python3')
-	let g:pymode_python = 'python3'
-endif
 
 " Erlang
 let erlang_show_errors = 0
