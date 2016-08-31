@@ -75,6 +75,7 @@ set number                  " line numbers
 set ruler                   " show the cursor position
 set wildmenu                " show menu for command completion
 set history=100             " keep 100 lines of history
+set noshowmode              " Don't show mode in statusline
 
 set modeline
 set modelines=10
@@ -97,6 +98,14 @@ nmap <silent> <leader>s :set nolist!<CR>
 nnoremap <silent> <leader>en :setlocal spell spelllang=en_us<CR>
 nnoremap <silent> <leader>de :setlocal spell spelllang=de_de<CR>
 nnoremap <silent> <leader>ns :set nospell<CR>
+
+" Statusline file name, encoding, file format | column, line, lines
+set statusline=%t
+set statusline+=\ [%{strlen(&fenc)?&fenc:'none'},%{&ff}]
+set statusline+=\ %y
+set statusline+=%=
+set statusline+=%c,%l/%L
+set laststatus=2            " Always show statusline
 
 " OmniComplete
 set completeopt=menuone,longest
@@ -135,11 +144,9 @@ nmap <leader>" ysiw"
 let g:jedi#popup_on_dot = 0
 let g:jedi#goto_command = "<F4>"
 let g:jedi#documentation_command = "<F3>"
+let g:jedi#show_call_signatures = 2
 
 " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_wq = 0
 
