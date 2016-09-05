@@ -116,6 +116,11 @@ let g:SuperTabLongestHighlight = 1
 nnoremap <leader>nt :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\.pyc$', '\~$', '__pycache__', 'egg-info', 'node_modules']
 let NERDTreeRespectWildIgnore = 1
+let NERDTreeStatusline = 'NerdTree'
+let NERDTreeAutoDeleteBuffer = 1
+if has('gui_running')
+    autocmd vimenter * NERDTree
+endif
 
 " EditorConfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
