@@ -39,6 +39,8 @@ Bundle 'Jinja'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'scrooloose/syntastic'
+Bundle 'pearofducks/ansible-vim'
+Bundle 'fatih/vim-go'
 
 if vundle_needs_install == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -77,6 +79,8 @@ set wildmenu                " show menu for command completion
 set history=100             " keep 100 lines of history
 set noshowmode              " Don't show mode in statusline
 
+set autowrite
+
 set modeline
 set modelines=10
 
@@ -106,6 +110,9 @@ set statusline+=\ %y
 set statusline+=%=
 set statusline+=%c,%l/%L
 set laststatus=2            " Always show statusline
+
+" Quickfix full width
+autocmd filetype qf wincmd J
 
 " OmniComplete
 set completeopt=menuone,longest
@@ -150,6 +157,14 @@ let g:jedi#popup_on_dot = 0
 let g:jedi#goto_command = "<F4>"
 let g:jedi#documentation_command = "<F3>"
 let g:jedi#show_call_signatures = 2
+
+" Go
+let g:go_list_type = "quickfix"
+let g:go_highlight_types = 1
+let g:go_highlight_functions = 1
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+autocmd FileType go nmap <leader>t  <Plug>(go-test)
 
 " Syntastic
 let g:syntastic_always_populate_loc_list = 1
