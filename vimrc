@@ -16,7 +16,7 @@ call vundle#rc()
 
 " System
 Bundle 'gmarik/vundle'
-Bundle 'altercation/vim-colors-solarized'
+Bundle 'andreash/vim-colors-solarized'
 Bundle 'ntpeters/vim-better-whitespace'
 Bundle 'editorconfig/editorconfig-vim'
 Bundle 'rbgrouleff/bclose.vim'
@@ -176,7 +176,7 @@ autocmd FileType javascript setlocal noexpandtab
 autocmd BufNewFile,BufRead *.json set ft=javascript
 
 " Solarized theme
-if has('gui_running') || $TERM_PROGRAM == "iTerm.app"
+if has('gui_running') || $TERM_PROGRAM =~ "iTerm" || $TERM =~ "rxvt"
 	set background=dark
 	colorscheme solarized
 endif
