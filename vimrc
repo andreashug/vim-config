@@ -16,7 +16,7 @@ call vundle#rc()
 
 " System
 Bundle 'gmarik/vundle'
-Bundle 'andreash/vim-colors-solarized'
+Bundle 'andreashug/vim-colors-solarized'
 Bundle 'ntpeters/vim-better-whitespace'
 Bundle 'editorconfig/editorconfig-vim'
 Bundle 'rbgrouleff/bclose.vim'
