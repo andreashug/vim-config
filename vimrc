@@ -172,6 +172,14 @@ let g:syntastic_check_on_wq = 0
 
 " Python
 autocmd FileType python setlocal expandtab
+py3 << EOF
+import os, sys, pathlib
+if 'VIRTUAL_ENV' in os.environ:
+    venv = os.getenv('VIRTUAL_ENV')
+    site_packages = next(pathlib.Path(venv, 'lib').glob('python*/site-packages'), None)
+    if site_packages:
+        sys.path.insert(0, str(site_packages))
+EOF
 
 " Erlang
 let erlang_show_errors = 0
