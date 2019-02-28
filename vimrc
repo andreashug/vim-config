@@ -86,6 +86,7 @@ set modelines=10
 
 " BufExplorer
 nmap <F2> :BufExplorer<CR>
+let g:bufExplorerShowRelativePath=1
 
 " Deactivat highlights
 nnoremap <silent> <leader>h :nohl<CR>
