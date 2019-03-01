@@ -144,6 +144,7 @@ nnoremap <leader>a :Ack!<Space>
 
 " UltiSnips
 let g:UltiSnipsSnippetsDir = "~/.vim/ultisnips"
+let g:UltiSnipsSnippetDirectories = ["ultisnips"]
 
 " Bclose
 nnoremap <silent> <leader>d :Bclose<CR>
