@@ -83,6 +83,8 @@ set autowrite
 set modeline
 set modelines=10
 
+set fillchars+=vert:│
+
 " BufExplorer
 nmap <F2> :BufExplorer<CR>
 let g:bufExplorerShowRelativePath=1
