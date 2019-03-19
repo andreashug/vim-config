@@ -69,8 +69,8 @@ set incsearch
 set ignorecase
 set smartcase
 
-set backupdir=~/.vim/tmp,.  " backup directories
-set directory=~/.vim/tmp,.  " swapfile directories
+set backupdir=~/.vim/tmp//,.
+set directory=~/.vim/tmp//,.
 
 set number                  " line numbers
 set ruler                   " show the cursor position
@@ -206,5 +206,8 @@ if has('gui_running') || $TERM_PROGRAM =~ "iTerm" || $TERM =~ "rxvt"
 	set background=dark
 	colorscheme solarized
 endif
+
+set guioptions-=L
+set guioptions-=r
 
 highlight ExtraWhitespace ctermbg=darkred guibg=#382424
