@@ -210,4 +210,9 @@ endif
 set guioptions-=L
 set guioptions-=r
 
+" Use X11 clipboard
+if has('unix')
+	set clipboard=unnamedplus
+endif
+
 highlight ExtraWhitespace ctermbg=darkred guibg=#382424
