@@ -105,10 +105,11 @@ nnoremap <silent> <leader>en :setlocal spell spelllang=en_us<CR>
 nnoremap <silent> <leader>de :setlocal spell spelllang=de_de<CR>
 nnoremap <silent> <leader>ns :set nospell<CR>
 
-" Statusline file name, encoding, file format | column, line, lines
+" Statusline file name, encoding, file format, readonly | column, line, lines
 set statusline=%t
 set statusline+=\ [%{strlen(&fenc)?&fenc:'none'},%{&ff}]
 set statusline+=\ %y
+set statusline+=\ %r
 set statusline+=%=
 set statusline+=%c,%l/%L
 set laststatus=2            " Always show statusline
