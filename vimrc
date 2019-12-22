@@ -16,7 +16,7 @@ call vundle#rc()
 
 " System
 Bundle 'gmarik/vundle'
-Bundle 'andreashug/vim-colors-solarized'
+Bundle 'andreashug/vim-lunarized'
 Bundle 'ntpeters/vim-better-whitespace'
 Bundle 'editorconfig/editorconfig-vim'
 Bundle 'rbgrouleff/bclose.vim'
@@ -52,6 +52,8 @@ filetype indent on
 
 syntax on
 
+colorscheme lunarized
+
 set encoding=utf-8
 set fileencoding=utf-8
 
@@ -82,6 +84,9 @@ set autowrite
 
 set modeline
 set modelines=10
+
+set guioptions-=L
+set guioptions-=r
 
 set fillchars+=vert:│
 
@@ -202,14 +207,6 @@ autocmd FileType javascript setlocal noexpandtab
 " JSON
 autocmd BufNewFile,BufRead *.json set ft=javascript
 
-" Solarized theme
-if has('gui_running') || $TERM_PROGRAM =~ "iTerm" || $TERM =~ "rxvt"
-	set background=dark
-	colorscheme solarized
-endif
-
-set guioptions-=L
-set guioptions-=r
 
 " Use X11 clipboard
 if has('unix')
