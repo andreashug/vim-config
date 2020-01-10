@@ -31,6 +31,7 @@ Bundle 'ervandew/supertab'
 Bundle 'vimoutliner/vimoutliner'
 Bundle 'jlanzarotta/bufexplorer'
 Bundle 'kien/ctrlp.vim'
+Bundle 'kamykn/spelunker.vim'
 
 " Programming
 Bundle 'jimenezrick/vimerl'
@@ -162,6 +163,11 @@ nnoremap <silent> <leader>d :Bclose<CR>
 " Surrond shortcuts
 nmap <leader>' ysiw'
 nmap <leader>" ysiw"
+
+" Spelunker
+let g:enable_spelunker_vim = 0
+let g:spelunker_spell_bad_group = 'SpellBad'
+let g:spelunker_complex_or_compound_word_group = 'SpellBad'
 
 " Jedi
 let g:jedi#popup_on_dot = 0
