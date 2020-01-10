@@ -52,6 +52,7 @@ filetype indent on
 
 syntax on
 
+let g:lunarized_export = 1
 colorscheme lunarized
 
 set encoding=utf-8
@@ -213,4 +214,5 @@ if has('unix')
 	set clipboard=unnamedplus
 endif
 
-highlight ExtraWhitespace ctermbg=darkred guibg=#382424
+" Additional highlighting
+call g:LunarizedHighlight("ExtraWhiteSpace", g:lunarized_ucurl, g:lunarized_none, g:lunarized_back, g:lunarized_red)
