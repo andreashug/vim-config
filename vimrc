@@ -37,6 +37,7 @@ Bundle 'jimenezrick/vimerl'
 Bundle 'tpope/vim-surround'
 Bundle 'Jinja'
 Bundle 'davidhalter/jedi-vim'
+Bundle 'fisadev/vim-isort'
 Bundle 'scrooloose/syntastic'
 Bundle 'pearofducks/ansible-vim'
 Bundle 'fatih/vim-go'
@@ -179,6 +180,9 @@ autocmd FileType go nmap <leader>t  <Plug>(go-test)
 " Syntastic
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_wq = 0
+
+" Isort
+let g:vim_isort_map = ""
 
 " Python
 autocmd FileType python setlocal expandtab
