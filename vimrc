@@ -129,6 +129,7 @@ autocmd filetype qf wincmd J
 set completeopt=menuone,longest
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabLongestHighlight = 1
+let g:SuperTabCrMapping = 1
 
 " NERDTree
 nnoremap <leader>nt :NERDTreeToggle<CR>
