@@ -23,18 +23,17 @@ Bundle 'rbgrouleff/bclose.vim'
 
 " Tools
 Bundle 'tpope/vim-fugitive'
-Bundle 'mileszs/ack.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'SirVer/ultisnips'
 Bundle 'ervandew/supertab'
 Bundle 'vimoutliner/vimoutliner'
 Bundle 'jlanzarotta/bufexplorer'
-Bundle 'kien/ctrlp.vim'
 Bundle 'kamykn/spelunker.vim'
+Bundle 'Yggdroot/LeaderF'
+Bundle 'majutsushi/tagbar'
 
 " Programming
-Bundle 'jimenezrick/vimerl'
 Bundle 'tpope/vim-surround'
 Bundle 'Jinja'
 Bundle 'davidhalter/jedi-vim'
@@ -96,6 +95,11 @@ set fillchars+=vert:│
 " BufExplorer
 nmap <F2> :BufExplorer<CR>
 let g:bufExplorerShowRelativePath=1
+let g:bufExplorerDisableDefaultKeyMapping=1
+
+" Tagbar
+nnoremap <silent> <F12> :TagbarOpenAutoClose<CR>
+nnoremap <silent> <S-F12> :TagbarOpen fj<CR>
 
 " Deactivat highlights
 nnoremap <silent> <leader>h :nohl<CR>
@@ -106,21 +110,25 @@ set foldlevel=99
 
 " Toggle whitespace
 set listchars=tab:>-,trail:·
-nmap <silent> <leader>s :set nolist!<CR>
+nmap <silent> <leader>. :set nolist!<CR>
 
 " Spelling
-nnoremap <silent> <leader>en :setlocal spell spelllang=en_us<CR>
-nnoremap <silent> <leader>de :setlocal spell spelllang=de_de<CR>
-nnoremap <silent> <leader>ns :set nospell<CR>
+nnoremap <silent> <leader>se :setlocal spell spelllang=en_us<CR>
+nnoremap <silent> <leader>sd :setlocal spell spelllang=de_de<CR>
+nnoremap <silent> <leader>sn :set nospell<CR>
 
-" Statusline file name, encoding, file format, readonly | column, line, lines
-set statusline=%t
+" Statusline file name, encoding, file format, modified, readonly | column, line, lines
+set statusline=%.50f
 set statusline+=\ [%{strlen(&fenc)?&fenc:'none'},%{&ff}]
 set statusline+=\ %y
+set statusline+=\ %m
 set statusline+=\ %r
 set statusline+=%=
 set statusline+=%c,%l/%L
 set laststatus=2            " Always show statusline
+
+" Cursor
+set guicursor+=a:blinkon0
 
 " Quickfix full width
 autocmd filetype qf wincmd J
@@ -131,35 +139,43 @@ let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabLongestHighlight = 1
 let g:SuperTabCrMapping = 1
 
+" Bclose
+let g:bclose_no_plugin_maps = 1
+
 " NERDTree
-nnoremap <leader>nt :NERDTreeToggle<CR>
+nnoremap <silent> <F11> :NERDTreeFind<CR>
+nnoremap <silent> <S-F11> :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\.pyc$', '\~$', '__pycache__', 'egg-info', 'node_modules']
 let NERDTreeRespectWildIgnore = 1
 let NERDTreeStatusline = 'NerdTree'
 let NERDTreeAutoDeleteBuffer = 1
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 if has('gui_running')
-    autocmd vimenter * NERDTree
+	augroup nerdtree
+		autocmd vimenter * NERDTree
+		autocmd vimenter * wincmd w
+	augroup END
 endif
 
 " EditorConfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
-" CtrlP
-nnoremap <C-Space> :CtrlP<CR>
-let g:ctrlp_custom_ignore = {
-  \ 'dir': 'node_modules$\|egg-info$\|__pycache__$',
-  \ 'files': '\.pyc\|\~$',
-  \ }
-
-" Ack
-nnoremap <leader>a :Ack!<Space>
+" LeaderF
+let g:Lf_ShowDevIcons = 0
+let g:Lf_WindowHeight = 15
+let g:Lf_CacheDirectory = $HOME."/.cache"
+let g:Lf_ReverseOrder = 1
+let g:Lf_DisableStl = 1
+nnoremap <leader>t :LeaderfTag<CR>
+nnoremap <leader>b :LeaderfBufTag<CR>
+nnoremap <leader>r :<C-U><C-R>=printf("Leaderf! rg -w -e %s ", expand("<cword>"))<CR><CR>
+nnoremap <C-F> :LeaderfRgInteractive<CR>
+nnoremap <C-S-F> :Leaderf! rg -e<Space>
 
 " UltiSnips
-let g:UltiSnipsSnippetsDir = "~/.vim/ultisnips"
 let g:UltiSnipsSnippetDirectories = ["ultisnips"]
-
-" Bclose
-nnoremap <silent> <leader>d :Bclose<CR>
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
 
 " Surrond shortcuts
 nmap <leader>' ysiw'
@@ -167,29 +183,37 @@ nmap <leader>" ysiw"
 
 " Spelunker
 let g:enable_spelunker_vim = 0
-let g:spelunker_spell_bad_group = 'SpellBad'
-let g:spelunker_complex_or_compound_word_group = 'SpellBad'
+let g:spelunker_white_list_for_user = []
 
 " Jedi
 let g:jedi#popup_on_dot = 0
+let g:jedi#completions_command = "<leader>jc"
 let g:jedi#goto_command = "<F4>"
-let g:jedi#documentation_command = "<F3>"
+let g:jedi#goto_assignments_command = ""
+let g:jedi#documentation_command = "<F1>"
+let g:jedi#rename_command = "<leader>jr"
+let g:jedi#usages_command = "<leader>ju"
 let g:jedi#show_call_signatures = 2
 
 " Go
 let g:go_list_type = "quickfix"
 let g:go_highlight_types = 1
 let g:go_highlight_functions = 1
-autocmd FileType go nmap <leader>b  <Plug>(go-build)
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
-autocmd FileType go nmap <leader>t  <Plug>(go-test)
+autocmd FileType go nmap <leader>gb  <Plug>(go-build)
+autocmd FileType go nmap <leader>gr  <Plug>(go-run)
+autocmd FileType go nmap <leader>gt  <Plug>(go-test)
 
 " Syntastic
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_python_checkers = ['flake8', 'python']
 
 " Isort
-let g:vim_isort_map = ""
+autocmd FileType python nnoremap <F3> :Isort<CR>
+
+" Tags
+set tags=.git/tags,.tags
+set notagrelative
 
 " Python
 autocmd FileType python setlocal expandtab
@@ -202,8 +226,8 @@ if 'VIRTUAL_ENV' in os.environ:
         sys.path.insert(0, str(site_packages))
 EOF
 
-" Erlang
-let erlang_show_errors = 0
+" Git commit
+autocmd FileType gitcommit setlocal spell spelllang=en_us
 
 " ReStructured Text
 autocmd FileType rst setlocal textwidth=72 formatoptions-=l wrapmargin=0
@@ -216,14 +240,8 @@ autocmd FileType html setlocal noexpandtab
 autocmd FileType css setlocal noexpandtab
 autocmd FileType javascript setlocal noexpandtab
 
-" JSON
-autocmd BufNewFile,BufRead *.json set ft=javascript
-
 
 " Use X11 clipboard
 if has('unix')
 	set clipboard=unnamedplus
 endif
-
-" Additional highlighting
-call g:LunarizedHighlight("ExtraWhiteSpace", g:lunarized_ucurl, g:lunarized_none, g:lunarized_back, g:lunarized_red)
