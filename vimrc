@@ -39,8 +39,10 @@ Bundle 'Jinja'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'fisadev/vim-isort'
 Bundle 'scrooloose/syntastic'
+Bundle 'psf/black'
 Bundle 'pearofducks/ansible-vim'
 Bundle 'fatih/vim-go'
+Bundle 'cespare/vim-toml'
 
 if vundle_needs_install == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -64,6 +66,7 @@ set backspace=indent,eol,start
 set softtabstop=0			" number of spaces that a tab counts while editing
 set tabstop=4               " default tab width
 set shiftwidth=4            " default tab width when shifting
+set formatoptions-=t
 
 set hidden                  " allow modified buffers to be hidden
 set ttyfast
@@ -159,12 +162,12 @@ endif
 
 " EditorConfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+let g:EditorConfig_preserve_formatoptions = 1
 
 " LeaderF
 let g:Lf_ShowDevIcons = 0
 let g:Lf_WindowHeight = 15
 let g:Lf_CacheDirectory = $HOME."/.cache"
-let g:Lf_ReverseOrder = 1
 let g:Lf_DisableStl = 1
 nnoremap <leader>t :LeaderfTag<CR>
 nnoremap <leader>b :LeaderfBufTag<CR>
@@ -210,6 +213,9 @@ let g:syntastic_python_checkers = ['flake8', 'python']
 
 " Isort
 autocmd FileType python nnoremap <F3> :Isort<CR>
+
+" Black
+let g:black_virtualenv = "~/.vim/bundle/black/venv"
 
 " Tags
 set tags=.git/tags,.tags
