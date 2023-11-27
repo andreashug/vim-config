@@ -1,123 +1,69 @@
-set nocompatible              " be iMproved
+call plug#begin('~/.vim-test/plugged')
+Plug 'preservim/nerdtree'
+Plug 'andreashug/vim-lunarized'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'moll/vim-bbye'
+Plug 'tpope/vim-fugitive'
 
-let vundle_needs_install=1
-if !filereadable(expand('~/.vim/bundle/vundle/README.md'))
-    echo "Installing Vundle..."
-    echo ""
-    silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-    let vundle_needs_install=0
-endif
+Plug 'preservim/nerdtree'
+Plug 'preservim/nerdcommenter'
+Plug 'SirVer/ultisnips'
+Plug 'Yggdroot/LeaderF'
 
-filetype off
-
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" System
-Bundle 'gmarik/vundle'
-Bundle 'andreashug/vim-lunarized'
-Bundle 'ntpeters/vim-better-whitespace'
-Bundle 'editorconfig/editorconfig-vim'
-Bundle 'rbgrouleff/bclose.vim'
-
-" Tools
-Bundle 'tpope/vim-fugitive'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
-Bundle 'SirVer/ultisnips'
-Bundle 'ervandew/supertab'
-Bundle 'vimoutliner/vimoutliner'
-Bundle 'jlanzarotta/bufexplorer'
-Bundle 'kamykn/spelunker.vim'
-Bundle 'Yggdroot/LeaderF'
-Bundle 'majutsushi/tagbar'
-
-" Programming
-Bundle 'tpope/vim-surround'
-Bundle 'Jinja'
-Bundle 'davidhalter/jedi-vim'
-Bundle 'fisadev/vim-isort'
-Bundle 'scrooloose/syntastic'
-Bundle 'psf/black'
-Bundle 'pearofducks/ansible-vim'
-Bundle 'fatih/vim-go'
-Bundle 'cespare/vim-toml'
-
-if vundle_needs_install == 0
-    echo "Installing Bundles, please ignore key map error messages"
-    echo ""
-    :BundleInstall
-endif
-
-filetype plugin on
-filetype indent on
-
-syntax on
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/asyncomplete-file.vim'
+Plug 'prabirshrestha/asyncomplete-tags.vim'
+Plug 'ervandew/supertab'
+call plug#end()
 
 let g:lunarized_export = 1
 colorscheme lunarized
 
-set encoding=utf-8
-set fileencoding=utf-8
-
-set backspace=indent,eol,start
-
-set softtabstop=0			" number of spaces that a tab counts while editing
-set tabstop=4               " default tab width
-set shiftwidth=4            " default tab width when shifting
-set formatoptions-=t
 
 set hidden                  " allow modified buffers to be hidden
-set ttyfast
+
+set number                  " show line numbers
+set ruler                   " show the cursor position
+set history=100             " keep 100 lines of history
+set wildmenu                " show menu for command completion
+set hidden                  " allow modified buffers to be hidden
 
 set hlsearch                " highlight the last searched term
 set incsearch
 set ignorecase
 set smartcase
 
-set backupdir=~/.vim/tmp//,.
-set directory=~/.vim/tmp//,.
-
-set number                  " line numbers
-set ruler                   " show the cursor position
-set wildmenu                " show menu for command completion
-set history=100             " keep 100 lines of history
-set noshowmode              " Don't show mode in statusline
-
-set autowrite
-
-set modeline
-set modelines=10
-
-set guioptions-=L
-set guioptions-=r
-
-set fillchars+=vert:│
-
-" BufExplorer
-nmap <F2> :BufExplorer<CR>
-let g:bufExplorerShowRelativePath=1
-let g:bufExplorerDisableDefaultKeyMapping=1
-
-" Tagbar
-nnoremap <silent> <F12> :TagbarOpenAutoClose<CR>
-nnoremap <silent> <S-F12> :TagbarOpen fj<CR>
-
-" Deactivat highlights
+" Deactivate highlights
 nnoremap <silent> <leader>h :nohl<CR>
 
-" Folding
-set foldmethod=indent
-set foldlevel=99
+set noshowmode              " Don't show mode in statusline
+
+set backspace=indent,eol,start
+
+" Lines at beginning and ending of file are checked for config instructions
+set modeline
+set modelines=5
+
+
+set backupdir=~/.vim-test/tmp//,.
+set directory=~/.vim-test/tmp//,.
+
+set fillchars+=vert:│       " vertical line between windows
+
+
+set guioptions-=L           " deactivate left scrollbar
+set guioptions-=r           " deactivate right scrollbar
 
 " Toggle whitespace
 set listchars=tab:>-,trail:·
 nmap <silent> <leader>. :set nolist!<CR>
 
+
 " Spelling
-nnoremap <silent> <leader>se :setlocal spell spelllang=en_us<CR>
-nnoremap <silent> <leader>sd :setlocal spell spelllang=de_de<CR>
+nnoremap <silent> <leader>se :setlocal spell spelllang=en_us spellfile=.vimspell/en.utf-8.add,$HOME/.vim/spell/en.utf-8.add<CR>
+nnoremap <silent> <leader>sd :setlocal spell spelllang=de_de spellfile=.vimspell/de.utf-8.add,$HOME/.vim/spell/de.utf-8.add<CR>
 nnoremap <silent> <leader>sn :set nospell<CR>
 
 " Statusline file name, encoding, file format, modified, readonly | column, line, lines
@@ -130,20 +76,120 @@ set statusline+=%=
 set statusline+=%c,%l/%L
 set laststatus=2            " Always show statusline
 
-" Cursor
+
 set guicursor+=a:blinkon0
 
-" Quickfix full width
-autocmd filetype qf wincmd J
+" Auto relaod changed files
+set autoread
 
-" OmniComplete
-set completeopt=menuone,longest
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabLongestHighlight = 1
+
+" Tags
+set tags=.git/tags,.tags
+set notagrelative
+
+
+" Use X11 clipboard
+if has('unix')
+	set clipboard=unnamedplus
+endif
+
+" AUTOCOMPLETE
+
+" Don't show the auto complete popup automatically
+let g:asyncomplete_auto_popup = 0
+
+" Prevent asyncomplete from overwriting completeopt an set it manually
+let g:asyncomplete_auto_completeopt = 0
+set completeopt=menuone,noinsert,noselect
+
+" Let supertab call omni complete (lsp#complete)
+let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 let g:SuperTabCrMapping = 1
 
-" Bclose
-let g:bclose_no_plugin_maps = 1
+imap <C-P> <Plug>(asyncomplete_force_refresh)
+
+au User lsp_setup call lsp#register_server({
+	\ 'name': 'pylsp',
+	\ 'cmd': {server_info->['pylsp']},
+	\ 'allowlist': ['python'],
+	\ 'workspace_config': {'pylsp': {'plugins': {
+	    \ 'ruff': {'enabled': v:true, 'extendSelect': 'I'},
+	    \ 'black': {'enabled': v:false},
+	    \ 'rope_autoimport': {'enabled': v:true}
+	    \ }}}
+	\ })
+
+"au User lsp_setup call lsp#register_server({
+"	\ 'name': 'rufflsp',
+"	\ 'cmd': {server_info->['ruff-lsp']},
+"	\ 'allowlist': ['python'],
+"	\ })
+
+
+let g:lsp_preview_float = 1
+let g:lsp_async_completion = 1
+let g:lsp_completion_documentation_delay = 500
+let g:lsp_diagnostics_echo_cursor = 1  " show hint below status bar
+let g:lsp_document_highlight_enabled = 0  " don't highlight reference to word under cursor
+let g:lsp_diagnostics_virtual_text_enabled = 0
+let g:lsp_diagnostics_highlights_enabled = 1
+let g:lsp_diagnostics_highlights_insert_mode_enabled = 0
+let g:lsp_diagnostics_signs_insert_mode_enabled = 0
+let g:lsp_document_code_action_signs_enabled = 0
+"let g:lsp_diagnostics_float_cursor = 1
+let g:lsp_diagnostics_signs_error = {'text': '❗'}
+let g:lsp_diagnostics_signs_warning = {'text': '⚠'}
+let g:lsp_diagnostics_signs_hint = {'text': '💡'}
+let g:lsp_diagnostics_signs_information = {'text': '🔍'}
+
+highlight PopupWindow guifg=#909090 guibg=#1b1b1b
+augroup lsp_float_colours
+	" lsp#document_hover_preview_winid = lsp-hover
+	" lsp#ui#vim#output#getpreviewwinid = preview when typing
+	autocmd!
+	autocmd User lsp_float_opened
+		\ call setwinvar(lsp#document_hover_preview_winid(), '&wincolor', 'PopupWindow')
+	autocmd User lsp_float_opened
+		\ call setwinvar(lsp#ui#vim#output#getpreviewwinid(), '&wincolor', 'PopupWindow')
+	"autocmd User lsp_float_opened
+		"\ call popup_setoptions(lsp#document_hover_preview_winid(), {'borderchars': ['─', '.', '─', '.', '┌', '┐', '┘', '└']})
+	"autocmd User lsp_float_opened
+		"\ call popup_setoptions(lsp#ui#vim#output#getpreviewwinid(), {'borderchars': ['─', '.', '─', '.', '┌', '┐', '┘', '└']})
+augroup end
+
+
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=auto
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <buffer> <F2> <plug>(lsp-hover)
+    nmap <buffer> <F3> <plug>(lsp-references)
+    nmap <buffer> <F4> <plug>(lsp-definition)
+    nmap <buffer> <F5> <plug>(lsp-code-action)
+    nmap <buffer> <c-b> <plug>(lsp-document-format)
+    nmap <buffer> gs <plug>(lsp-document-symbol-search)
+    nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+    nmap <buffer> gi <plug>(lsp-implementation)
+    nmap <buffer> gt <plug>(lsp-type-definition)
+    nmap <buffer> <leader>rn <plug>(lsp-rename)
+    nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+    "nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
+    "nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
+
+    let g:lsp_format_sync_timeout = 1000
+
+    autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
+    
+    " refer to doc to add more commands
+endfunction
+
+augroup lsp_install
+    au!
+    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+
 
 " NERDTree
 nnoremap <silent> <F11> :NERDTreeFind<CR>
@@ -160,94 +206,24 @@ if has('gui_running')
 	augroup END
 endif
 
-" EditorConfig
-let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
-let g:EditorConfig_preserve_formatoptions = 1
 
 " LeaderF
 let g:Lf_ShowDevIcons = 0
 let g:Lf_WindowHeight = 15
 let g:Lf_CacheDirectory = $HOME."/.cache"
 let g:Lf_DisableStl = 1
-nnoremap <leader>t :LeaderfTag<CR>
-nnoremap <leader>b :LeaderfBufTag<CR>
-nnoremap <leader>r :<C-U><C-R>=printf("Leaderf! rg -w -e %s ", expand("<cword>"))<CR><CR>
+let g:Lf_PreviewInPopup = 0
+nnoremap <C-SPACE> :Leaderf buffer<CR>
+nnoremap <leader>r :Leaderf! buffer<CR>
+nnoremap <leader>t :Leaderf tag<CR>
+nnoremap <leader>b :Leaderf bufTag<CR>
+nnoremap <leader>w :<C-U><C-R>=printf("Leaderf! --stayOpen rg -w -e %s ", expand("<cword>"))<CR><CR>
+nnoremap <leader>g :Leaderf! --stayOpen rg -e<Space>
+nnoremap <leader>af :Leaderf file --no-ignore<CR>
 nnoremap <C-F> :LeaderfRgInteractive<CR>
-nnoremap <C-S-F> :Leaderf! rg -e<Space>
+autocmd WinEnter */Buffer/LeaderF resize 25
 
 " UltiSnips
 let g:UltiSnipsSnippetDirectories = ["ultisnips"]
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
-
-" Surrond shortcuts
-nmap <leader>' ysiw'
-nmap <leader>" ysiw"
-
-" Spelunker
-let g:enable_spelunker_vim = 0
-let g:spelunker_white_list_for_user = []
-
-" Jedi
-let g:jedi#popup_on_dot = 0
-let g:jedi#completions_command = "<leader>jc"
-let g:jedi#goto_command = "<F4>"
-let g:jedi#goto_assignments_command = ""
-let g:jedi#documentation_command = "<F1>"
-let g:jedi#rename_command = "<leader>jr"
-let g:jedi#usages_command = "<leader>ju"
-let g:jedi#show_call_signatures = 2
-
-" Go
-let g:go_list_type = "quickfix"
-let g:go_highlight_types = 1
-let g:go_highlight_functions = 1
-autocmd FileType go nmap <leader>gb  <Plug>(go-build)
-autocmd FileType go nmap <leader>gr  <Plug>(go-run)
-autocmd FileType go nmap <leader>gt  <Plug>(go-test)
-
-" Syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers = ['flake8', 'python']
-
-" Isort
-autocmd FileType python nnoremap <F3> :Isort<CR>
-
-" Black
-let g:black_virtualenv = "~/.vim/bundle/black/venv"
-
-" Tags
-set tags=.git/tags,.tags
-set notagrelative
-
-" Python
-autocmd FileType python setlocal expandtab
-py3 << EOF
-import os, sys, pathlib
-if 'VIRTUAL_ENV' in os.environ:
-    venv = os.getenv('VIRTUAL_ENV')
-    site_packages = next(pathlib.Path(venv, 'lib').glob('python*/site-packages'), None)
-    if site_packages:
-        sys.path.insert(0, str(site_packages))
-EOF
-
-" Git commit
-autocmd FileType gitcommit setlocal spell spelllang=en_us
-
-" ReStructured Text
-autocmd FileType rst setlocal textwidth=72 formatoptions-=l wrapmargin=0
-
-" HTML/CSS/JS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html setlocal noexpandtab
-autocmd FileType css setlocal noexpandtab
-autocmd FileType javascript setlocal noexpandtab
-
-
-" Use X11 clipboard
-if has('unix')
-	set clipboard=unnamedplus
-endif

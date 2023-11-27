@@ -1,14 +1,32 @@
-snippet ugt "import ugettext_lazy" b
-from django.utils.translation import ugettext_lazy as _
-endsnippet
+# Run :call UltiSnips#RefreshSnippets() to reload
 
 snippet gtl "import gettext_lazy" b
 from django.utils.translation import gettext_lazy as _
 endsnippet
 
 
+snippet tznow "import now" b
+from django.utils.timezone import now
+endsnippet
+
+
+snippet tzutc "import utc" b
+from django.utils.timezone import utc
+endsnippet
+
+
+snippet pdb "pdb breakpoint" i
+import pdb; pdb.set_trace()  # TODO: remove
+endsnippet
+
+
 snippet ipdb "ipdb breakpoint" i
 import ipdb; ipdb.set_trace()  # TODO: remove
+endsnippet
+
+
+snippet traceback "print traceback" i
+import traceback; traceback.print_exc()  # TODO: remove 
 endsnippet
 
 
@@ -95,7 +113,16 @@ endsnippet
 snippet ptc "pytest class" b
 @pytest.mark.django_db
 class Test${1:Name}:
-
 	def test_$2(self$3):
 		$0
+endsnippet
+
+snippet datamigration "data migration" b
+def forwards_func(apps, schema_editor):
+	${1:ModelName} = apps.get_model("${2:app}", "$1")
+	$0
+endsnippet
+
+snippet runpython "migration.RunPython"
+migrations.RunPython(${1:function_name}, reverse_code=migrations.RunPython.noop),
 endsnippet

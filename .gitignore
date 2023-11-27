@@ -3,5 +3,6 @@
 *.pyc
 /tmp
 /bundle
+/plugged
 /spell
 /black
