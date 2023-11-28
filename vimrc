@@ -133,14 +133,16 @@ let g:lsp_diagnostics_echo_cursor = 1  " show hint below status bar
 let g:lsp_document_highlight_enabled = 0  " don't highlight reference to word under cursor
 let g:lsp_diagnostics_virtual_text_enabled = 0
 let g:lsp_diagnostics_highlights_enabled = 1
-let g:lsp_diagnostics_highlights_insert_mode_enabled = 0
-let g:lsp_diagnostics_signs_insert_mode_enabled = 0
+let g:lsp_diagnostics_highlights_insert_mode_enabled = 1
+let g:lsp_diagnostics_signs_insert_mode_enabled = 1
+let g:lsp_inlay_hints_enabled = 1
 let g:lsp_document_code_action_signs_enabled = 0
-"let g:lsp_diagnostics_float_cursor = 1
-let g:lsp_diagnostics_signs_error = {'text': '❗'}
-let g:lsp_diagnostics_signs_warning = {'text': '⚠'}
-let g:lsp_diagnostics_signs_hint = {'text': '💡'}
-let g:lsp_diagnostics_signs_information = {'text': '🔍'}
+let g:lsp_diagnostics_signs_error = {'text': 'E'}
+let g:lsp_diagnostics_signs_warning = {'text': 'W'}
+let g:lsp_diagnostics_signs_hint = {'text': 'H'}
+let g:lsp_diagnostics_signs_information = {'text': 'I'}
+
+" highlight LspWarningHighlight guifg=#00FF00
 
 highlight PopupWindow guifg=#909090 guibg=#1b1b1b
 augroup lsp_float_colours
@@ -160,7 +162,7 @@ augroup end
 
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
-    setlocal signcolumn=auto
+    "setlocal signcolumn=auto
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
     nmap <buffer> <F2> <plug>(lsp-hover)
     nmap <buffer> <F3> <plug>(lsp-references)
