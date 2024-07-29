@@ -112,7 +112,7 @@ endif
 "set completeopt=menuone,noinsert,noselect
 
 " Let supertab call omni complete (lsp#complete)
-let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabCrMapping = 1
 
 imap <C-P> <Plug>(asyncomplete_force_refresh)
@@ -196,7 +196,7 @@ augroup end
 
 
 function! s:on_lsp_buffer_enabled() abort
-    setlocal omnifunc=lsp#complete
+    setlocal completefunc=lsp#complete
     "setlocal signcolumn=auto
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
     nmap <buffer> <F2> <plug>(lsp-hover)
@@ -277,7 +277,7 @@ let g:ale_type_map = {
 let g:ale_completion_enabled = 0
 let g:ale_disable_lsp = 1
 
-imap <silent> <C-[> <Plug>(ale_complete)
+"imap <silent> <F5> <Plug>(ale_complete)
 "set omnifunc=ale#completion#OmniFunc
 "set completeopt=menu,menuone,popup,noselect,noinsert
 
