@@ -1,4 +1,4 @@
-call plug#begin('~/.vim-test/plugged')
+call plug#begin('~/.vim/plugged')
 Plug 'preservim/nerdtree'
 Plug 'andreashug/vim-lunarized'
 Plug 'editorconfig/editorconfig-vim'
@@ -49,8 +49,8 @@ set modeline
 set modelines=5
 
 
-set backupdir=~/.vim-test/tmp//,.
-set directory=~/.vim-test/tmp//,.
+set backupdir=~/.vim/tmp//,.
+set directory=~/.vim/tmp//,.
 
 set fillchars+=vert:│       " vertical line between windows
 
@@ -131,7 +131,7 @@ endfunction
 "	\ 'root_uri': function('s:pylsp_root_uri'),
 "au User lsp_setup call lsp#register_server({
 "	\ 'name': 'pylsp',
-"	\ 'cmd': {server_info->['pylsp', '-vv', '--log-file', '/home/andreas/.vim-test/pylsp.log']},
+"	\ 'cmd': {server_info->['pylsp', '-vv', '--log-file', '/home/andreas/.vim/pylsp.log']},
 "	\ 'allowlist': ['python'],
 "	\ 'workspace_config': {'pylsp': {'plugins': {
 "	    \ 'ruff': {'enabled': v:false, 'extendSelect': 'I'},
@@ -159,7 +159,10 @@ au User lsp_setup call lsp#register_server({
 "	\ })
 
 
-let g:lsp_log_file = expand('~/.vim-test/vimlsp.log')
+if !empty($VIM_LSP_LOG)
+	let g:lsp_log_file = fnamemodify($VIM_LSP_LOG, ':p')
+endif
+
 let g:lsp_diagnostics_enabled = 0
 let g:lsp_preview_float = 1
 let g:lsp_async_completion = 1
