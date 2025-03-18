@@ -40,6 +40,10 @@ set smartcase
 " Deactivate highlights
 nnoremap <silent> <leader>h :nohl<CR>
 
+" Unmap `only` command
+noremap <c-w>o <NOP>
+noremap <c-w><c-o> <NOP>
+
 set noshowmode              " Don't show mode in statusline
 
 set backspace=indent,eol,start
