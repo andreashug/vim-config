@@ -4,7 +4,6 @@ Plug 'andreashug/vim-lunarized'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'moll/vim-bbye'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-dotenv'
 
 Plug 'preservim/nerdtree'
 Plug 'preservim/nerdcommenter'
@@ -12,10 +11,6 @@ Plug 'SirVer/ultisnips'
 Plug 'Yggdroot/LeaderF'
 
 Plug 'prabirshrestha/vim-lsp'
-"Plug 'prabirshrestha/asyncomplete.vim'
-"Plug 'prabirshrestha/asyncomplete-lsp.vim'
-"Plug 'prabirshrestha/asyncomplete-file.vim'
-"Plug 'prabirshrestha/asyncomplete-tags.vim'
 Plug 'dense-analysis/ale'
 Plug 'ervandew/supertab'
 call plug#end()
@@ -37,12 +32,25 @@ set incsearch
 set ignorecase
 set smartcase
 
+" Minimum number of lines to show when scrolling vertically
+set scrolloff=5
+
+" Number of columns to scroll horizontally
+set sidescroll=1
+
+" Minimum number of columns to show when scrolling horizontally
+set sidescrolloff=2
+
 " Deactivate highlights
 nnoremap <silent> <leader>h :nohl<CR>
 
 " Unmap `only` command
 noremap <c-w>o <NOP>
 noremap <c-w><c-o> <NOP>
+
+" Save on ctrl-s and leader-s
+nnoremap <c-s> :w<CR>
+nnoremap <leader>s :w<CR>
 
 set noshowmode              " Don't show mode in statusline
 
@@ -66,6 +74,9 @@ set guioptions-=r           " deactivate right scrollbar
 set listchars=tab:>-,trail:·
 nmap <silent> <leader>. :set nolist!<CR>
 
+" Swap behavior of p and P in visual mode (don't replace text in register on p)
+xnoremap p P
+xnoremap P p
 
 " Spelling
 nnoremap <silent> <leader>se :setlocal spell spelllang=en_us spellfile=.vimspell/en.utf-8.add,$HOME/.vim/spell/en.utf-8.add<CR>
@@ -314,6 +325,10 @@ if has('gui_running')
 		autocmd vimenter * wincmd w
 	augroup END
 endif
+
+" NERDCommenter
+let g:NERDDefaultAlign = 'left'
+let g:NERDCommentEmptyLines = 1
 
 
 " LeaderF
