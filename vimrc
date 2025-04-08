@@ -178,11 +178,14 @@ if !empty($VIM_LSP_LOG)
 	let g:lsp_log_file = fnamemodify($VIM_LSP_LOG, ':p')
 endif
 
+" We use ALE for diagnostics
 let g:lsp_diagnostics_enabled = 0
+" Show signature help in floating window
 let g:lsp_preview_float = 1
 let g:lsp_async_completion = 1
 let g:lsp_completion_documentation_delay = 500
-let g:lsp_document_highlight_enabled = 0  " don't highlight reference to word under cursor
+" Don't highlight reference to word under cursor
+let g:lsp_document_highlight_enabled = 0  
 let g:lsp_inlay_hints_enabled = 1
 let g:lsp_document_code_action_signs_enabled = 0
 let g:lsp_hover_ui = 'float'
@@ -190,26 +193,31 @@ let g:lsp_show_message_log_level = 'log'
 
 " highlight LspWarningHighlight guifg=#00FF00
 
-highlight PopupWindow guifg=#909090 guibg=#1b1b1b
-augroup lsp_float_colours
-	" lsp#document_hover_preview_winid = lsp-hover
-	" lsp#ui#vim#output#getpreviewwinid = preview when typing
-	autocmd!
-	autocmd User lsp_float_opened
-		\ call setwinvar(lsp#document_hover_preview_winid(), '&wincolor', 'Normal')
-	autocmd User lsp_float_opened
-		\ call setwinvar(lsp#ui#vim#output#getpreviewwinid(), '&wincolor', 'Normal')
 
-	autocmd User lsp_float_opened
-		\ call popup_setoptions(
-			\ lsp#document_hover_preview_winid(), 
-			\ {'borderchars': ['─', '│', '─', '│', '╭', '╮', '╯', '╰']}
-		\ )
-	autocmd User lsp_float_opened
-		\ call popup_setoptions(
-			\ lsp#ui#vim#output#getpreviewwinid(), 
-			\ {'borderchars': ['─', '│', '─', '│', '╭', '╮', '╯', '╰']}
-		\ )
+"highlight PopupWindow guifg=#909090 guibg=#1b1b1b
+
+function SetLspFloatOptions()
+	"let l:highlight_group = 'PopupWindow'
+	let l:highlight_group = 'Normal'
+	let l:borderchars = ['─', '│', '─', '│', '╭', '╮', '╯', '╰']
+
+	if lsp#document_hover_preview_winid()
+		" ID of hover preview (lsp-hover)
+		let l:winid = lsp#document_hover_preview_winid()
+	elseif lsp#ui#vim#output#getpreviewwinid()
+		" ID of signature preview (when typing)
+		let l:winid = lsp#ui#vim#output#getpreviewwinid()
+	else
+		return
+	endif
+	
+	call setwinvar(l:winid, '&wincolor', l:highlight_group)
+	call popup_setoptions(l:winid, {'borderchars': l:borderchars})
+endfunction
+
+augroup lsp_float_colours
+	autocmd!
+	autocmd User lsp_float_opened call SetLspFloatOptions()
 augroup end
 
 
