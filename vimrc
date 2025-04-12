@@ -1,5 +1,4 @@
 call plug#begin('~/.vim/plugged')
-Plug 'preservim/nerdtree'
 Plug 'andreashug/vim-lunarized'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'moll/vim-bbye'
@@ -13,9 +12,10 @@ Plug 'Yggdroot/LeaderF'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'dense-analysis/ale'
 Plug 'ervandew/supertab'
+
+Plug 'kergoth/vim-hilinks', { 'on': 'HLT' }
 call plug#end()
 
-let g:lunarized_export = 1
 colorscheme lunarized
 
 
@@ -369,3 +369,7 @@ autocmd WinEnter */Buffer/LeaderF resize 25
 let g:UltiSnipsSnippetDirectories = ["ultisnips"]
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
+
+" ANSI codes for start/end undercurl
+let &t_Cs = "\e[4:3m"
+let &t_Ce = "\e[4:0m"
