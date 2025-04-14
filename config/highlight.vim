@@ -1,15 +1,24 @@
 " Additional highlighting rules
 
-hi! link ExtraWhiteSpace SpellBad
 
+" Reload this file on colorscheme changes because colorschemes reset all
+" highlights.
+augroup extend_colorscheme
+	autocmd!
+	autocmd Colorscheme * runtime config/highlight.vim
+augroup END
+
+
+" Links
+hi! link ExtraWhiteSpace SpellBad
 hi! link SpelunkerSpellBad SpellBad
 hi! link SpelunkerComplexOrCompoundWord SpellLocal
+
 
 if !exists('g:lunarized_loaded')
 	echom 'Skipping extra highlight rules because lunarized is not loaded'
 	finish
 endif
-
 
 " Python
 hi pythonSelf guifg=lunarized_green guibg=NONE gui=NONE cterm=NONE

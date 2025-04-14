@@ -4,5 +4,6 @@
 /tmp
 /bundle
 /plugged
+/autoload/plug.vim*
 /spell
 /black
