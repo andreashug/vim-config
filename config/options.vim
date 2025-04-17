@@ -27,8 +27,13 @@ set sidescroll=1
 " Minimum number of columns to show when scrolling horizontally
 set sidescrolloff=2
 
-set backupdir=~/.vim/tmp//,.
-set directory=~/.vim/tmp//,.
+" Create and set backup directory
+call mkdir($XDG_STATE_HOME .. '/vim/backup', 'p')
+set backupdir=$XDG_STATE_HOME/vim/backup//,.
+"
+" Create and set swap directory
+call mkdir($XDG_STATE_HOME .. '/vim/swap', 'p')
+set directory=$XDG_STATE_HOME/vim/swap//,.
 
 " Vertical line between windows
 set fillchars+=vert:│      
@@ -63,3 +68,7 @@ endif
 " ANSI codes for start/end undercurl
 let &t_Cs = "\e[4:3m"
 let &t_Ce = "\e[4:0m"
+
+" Log dir for plug-ins etc.
+let g:vim_log_dir = $XDG_STATE_HOME .. '/vim/logs/'
+call mkdir(g:vim_log_dir, 'p')

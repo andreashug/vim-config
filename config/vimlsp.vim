@@ -15,11 +15,6 @@ let g:lsp_show_message_log_level = 'log'
 let g:lsp_fold_enabled = 0
 
 
-if !empty($VIM_LSP_LOG)
-	let g:lsp_log_file = fnamemodify($VIM_LSP_LOG, ':p')
-endif
-
-
 augroup vim_lsp_setup
 	au!
 	au User lsp_setup call lsp#register_server({
@@ -77,4 +72,15 @@ function s:SetLspFloatOptions()
 	
 	call setwinvar(l:winid, '&wincolor', l:highlight_group)
 	call popup_setoptions(l:winid, {'borderchars': l:borderchars})
+endfunction
+
+
+function g:SetLspLog(active)
+	if a:active == v:true
+		let g:lsp_log_file = g:vim_log_dir .. 'vim-lsp.log'
+		let g:lsp_log_verbose = 1
+	else
+		let g:lsp_log_file = ''
+		let g:lsp_log_verbose = 0
+	endif
 endfunction

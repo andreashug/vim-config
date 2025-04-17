@@ -1,4 +1,4 @@
-call plug#begin('~/.vim/plugged')
+call plug#begin()
 Plug 'andreashug/vim-lunarized'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'moll/vim-bbye'
