@@ -31,6 +31,6 @@ hi Lf_hl_match1 guifg=lunarized_green guibg=NONE gui=NONE cterm=NONE
 hi Lf_hl_match2 guifg=lunarized_cyan guibg=NONE gui=NONE cterm=NONE
 hi Lf_hl_match3 guifg=lunarized_purple guibg=NONE gui=NONE cterm=NONE
 hi Lf_hl_match4 guifg=lunarized_yellow guibg=NONE gui=NONE cterm=NONE
-hi Lf_hl_cursorline guifg=lunarized_bright1 guibg=NONE gui=NONE cterm=NONE
-hi Lf_hl_tagFile guifg=lunarized_faint2 guibg=NONE gui=NONE cterm=NONE
+hi Lf_hl_cursorline guifg=lunarized_fg_s guibg=NONE gui=NONE cterm=NONE
+hi Lf_hl_tagFile guifg=lunarized_fg_fe guibg=NONE gui=NONE cterm=NONE
 hi Lf_hl_rgHighlight guifg=lunarized_yellow guibg=NONE gui=NONE cterm=NONE
