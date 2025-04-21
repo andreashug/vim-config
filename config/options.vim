@@ -47,13 +47,13 @@ set signcolumn=auto
 " GUI options
 set guioptions-=m  " Deactivate menu bar
 set guioptions-=T  " Deactivate button bar
-set guioptions-=L  " Deactivate left scrollbar
-set guioptions-=r  " Deactivate right scrollbar
+set guioptions-=L  " Deactivate left scroll bar
+set guioptions-=r  " Deactivate right scroll bar
 
 " Deactivate cursor blinking in all modes
 set guicursor+=a:blinkon0
 
-" Auto relaod changed files
+" Auto reload changed files
 set autoread
 
 " Tags
