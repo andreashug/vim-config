@@ -36,7 +36,14 @@ runtime config/statusline.vim
 runtime config/autocomplete.vim
 runtime config/leaderf.vim
 runtime config/vimlsp.vim
+runtime config/vimlsp-pylsp.vim
 runtime config/nerdtree.vim
 runtime config/misc.vim
 runtime config/spelling.vim
+
+set termguicolors
+
+set guifont=Source\ Code\ Pro\ 11
+
+call SetLspLog(v:true)
 ```
