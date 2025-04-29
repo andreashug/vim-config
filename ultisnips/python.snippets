@@ -35,6 +35,19 @@ import traceback; traceback.print_exc()  # TODO: remove
 endsnippet
 
 
+snippet logging "import logger" b
+import logging
+logger = logging.getLogger(__name__)
+endsnippet
+
+
+snippet iftype "conditional typing import" b
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+	$0
+endsnippet
+
+
 snippet dmc "django model" b
 class ${1:ModelName}(models.Model):
 	$0
