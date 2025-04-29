@@ -5,6 +5,10 @@ nnoremap <silent> <leader>h :nohl<CR>
 noremap <c-w>o <NOP>
 noremap <c-w><c-o> <NOP>
 
+" Unmap suspending
+nnoremap <c-z> <NOP>
+vnoremap <c-z> <NOP>
+
 " Save on ctrl-s and leader-s
 nnoremap <c-s> :w<CR>
 nnoremap <leader>s :w<CR>
