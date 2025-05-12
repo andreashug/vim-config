@@ -150,6 +150,12 @@ snippet @ptp "pytest parametrize" b
 )
 endsnippet
 
+snippet pts "pytest setup" b
+@pytest.fixture(autouse=True)
+def setup(self):
+	$0
+endsnippet
+
 snippet datamigration "data migration" b
 def forwards_func(apps, schema_editor):
 	${1:ModelName} = apps.get_model("${2:app}", "$1")
