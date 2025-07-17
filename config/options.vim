@@ -27,6 +27,9 @@ set sidescroll=1
 " Minimum number of columns to show when scrolling horizontally
 set sidescrolloff=2
 
+" Disable text auto-wrap
+set formatoptions-=t
+
 " Create and set backup directory
 call mkdir($XDG_STATE_HOME .. '/vim/backup', 'p')
 set backupdir=$XDG_STATE_HOME/vim/backup//,.

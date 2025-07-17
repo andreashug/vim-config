@@ -1,3 +1,6 @@
+" Use xml syntax
+setlocal filetype=xml
+
 " Tabs are 2 spaces wide
 setlocal tabstop=2
 

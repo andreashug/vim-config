@@ -1,5 +1,5 @@
 " Tabs are 4 spaces wide
-set tabstop=4
+setlocal tabstop=4
 
 " Use tabstop when indenting with >> / <<
-set shiftwidth=0
+setlocal shiftwidth=0
