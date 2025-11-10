@@ -21,7 +21,8 @@ if !exists('g:lunarized_loaded')
 endif
 
 " Python
-hi pythonSelf guifg=lunarized_green guibg=NONE gui=NONE cterm=NONE
+hi pythonClassVar guifg=lunarized_green guibg=NONE gui=NONE cterm=NONE
+hi pythonClass guifg=lunarized_blue guibg=NONE gui=NONE cterm=NONE
 hi pythonFunctionCall guifg=lunarized_purple guibg=NONE gui=NONE cterm=NONE
 
 " Leader F
