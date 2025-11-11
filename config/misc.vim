@@ -6,3 +6,6 @@ let g:NERDCommentEmptyLines = 1
 let g:UltiSnipsSnippetDirectories = ["ultisnips"]
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
+
+" Editorconfig
+let g:EditorConfig_preserve_formatoptions = 1
