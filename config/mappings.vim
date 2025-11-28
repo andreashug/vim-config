@@ -20,3 +20,12 @@ nnoremap <silent> <leader>. :set nolist!<CR>
 " Swap behavior of p and P in visual mode (don't replace text in register on p)
 xnoremap p P
 xnoremap P p
+
+" Copy the current file name to the clipboard
+nnoremap <silent> <c-f> :let @+ = expand("%:.")<CR>
+
+" Delete (close) current buffer
+nnoremap <silent> <c-q> :Bdelete<CR>
+
+" Open path from clipboard
+nnoremap <c-e> :call ClipboardOpen()<CR>
