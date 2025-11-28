@@ -15,6 +15,11 @@ from django.utils.timezone import utc
 endsnippet
 
 
+snippet DVE "import DjangoValidationError" b
+from django.core.exceptions import ValidationError as DjangoValidationError
+endsnippet
+
+
 snippet br "breakpoint" b
 breakpoint()  # TODO: remove
 endsnippet
@@ -141,7 +146,7 @@ def test_${1}($3):
 	$0
 endsnippet
 
-snippet @ptp "pytest parametrize" b
+snippet ptp "pytest parametrize" b
 @pytest.mark.parametrize(
 	"$1",
 	[
