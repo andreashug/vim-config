@@ -18,6 +18,6 @@ let g:Lf_PreviewResult = {
 nnoremap <C-SPACE> :Leaderf buffer<CR>
 nnoremap <leader>t :Leaderf tag<CR>
 nnoremap <leader>b :Leaderf bufTag<CR>
-nnoremap <leader>w :<C-U><C-R>=printf("Leaderf! --stayOpen rg -w -e %s ", expand("<cword>"))<CR><CR>
-nnoremap <leader>g :Leaderf! --stayOpen rg -e<Space>
+nnoremap <leader>w :<C-U><C-R>=printf("Leaderf! --stayOpen rg --hidden -w -e %s ", expand("<cword>"))<CR><CR>
+nnoremap <leader>g :Leaderf! --stayOpen rg --hidden -e<Space>
 nnoremap <leader>F :Leaderf file --no-ignore<CR>
